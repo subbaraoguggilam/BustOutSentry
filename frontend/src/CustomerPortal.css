@@ -1,0 +1,1016 @@
+/* ============================================================
+   APEX TRUST BANK - RETAIL INTERNET BANKING DESIGN SYSTEM
+   Conservative, Institutional, Information-Dense, Trustworthy
+   ============================================================ */
+
+:root {
+  /* Core Institutional Palette */
+  --bank-navy: #0B3D91;          /* Primary Bank Blue */
+  --bank-navy-dark: #072146;     /* Utility Bar & Header Dark */
+  --bank-navy-light: #154FB3;    /* Hover State for Primary Nav */
+  --bank-navy-subtle: #E8EFF9;   /* Selected Menu / Subtle Hover */
+  --bank-accent: #0056B3;        /* Action Links & Primary Buttons */
+  --bank-accent-hover: #083E82;
+
+  --bank-bg: #F4F6F8;            /* Neutral Light Gray Canvas */
+  --bank-panel: #FFFFFF;         /* Crisp White Container */
+  --bank-strip: #EEF2F6;         /* Panel Header Strip Background */
+  --bank-strip-border: #D0D7DE;  /* Hairline Divider */
+
+  --bank-border: #D9DEE3;        /* 1px Structural Borders */
+  --bank-border-light: #E9ECEF;  /* Subdued Hairline Divider */
+
+  /* Typography Colors */
+  --bank-text: #212529;          /* Deep Gray Body */
+  --bank-text-secondary: #495057;/* Secondary Details */
+  --bank-text-muted: #6C757D;    /* Helper Labels & Meta */
+  --bank-link: #0B3D91;
+
+  /* Transaction & Alert Semantics */
+  --bank-debit: #C5221F;         /* Strict Debit Red */
+  --bank-credit: #137333;        /* Strict Credit Green */
+  --bank-alert-bg: #FFF9E6;      /* Warning Notice Strip */
+  --bank-alert-border: #FFE082;
+  --bank-alert-text: #7A5300;
+
+  /* Typography & Sizing */
+  --bank-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --bank-font-size-base: 14px;
+  --bank-font-size-sm: 12px;
+  --bank-font-size-xs: 11px;
+  --bank-radius: 2px;            /* Max 2px - Strict Institutional Corners */
+}
+
+/* ============================================================
+   RESET & BASE STYLES
+   ============================================================ */
+.bank-portal {
+  font-family: var(--bank-font);
+  font-size: var(--bank-font-size-base);
+  color: var(--bank-text);
+  background-color: var(--bank-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+.bank-portal * {
+  box-sizing: border-box;
+}
+
+/* Tabular Numerals for Financial Data */
+.bank-portal .amount,
+.bank-portal .tabular-nums,
+.bank-portal .account-number,
+.bank-portal .ref-no {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.bank-portal a {
+  color: var(--bank-link);
+  text-decoration: none;
+}
+
+.bank-portal a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   1. TOP UTILITY BAR
+   ============================================================ */
+.bank-utility-bar {
+  background-color: var(--bank-navy-dark);
+  color: #CFD8DC;
+  font-size: var(--bank-font-size-sm);
+  padding: 0 1.5rem;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bank-brand-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bank-logo-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #FFFFFF;
+  color: var(--bank-navy);
+  font-weight: 900;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--bank-radius);
+  letter-spacing: -0.5px;
+}
+
+.bank-title {
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.bank-portal-tag {
+  color: #90A4AE;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-left: 8px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.bank-utility-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.bank-utility-item {
+  color: #CFD8DC;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bank-utility-item.timer {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 3px 8px;
+  border-radius: var(--bank-radius);
+  color: #ECEFF1;
+  font-weight: 600;
+}
+
+.bank-utility-item.timer.urgent {
+  color: #FF8A80;
+  background-color: rgba(211, 47, 47, 0.2);
+}
+
+.bank-utility-item.cust-id {
+  color: #B0BEC5;
+  font-family: monospace;
+}
+
+.bank-utility-link {
+  color: #ECEFF1;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.bank-utility-link:hover {
+  text-decoration: underline;
+}
+
+.bank-utility-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--bank-radius);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.bank-utility-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ============================================================
+   2. MAIN NAVIGATION BAR
+   ============================================================ */
+.bank-main-nav {
+  background-color: var(--bank-navy);
+  border-bottom: 2px solid #06255B;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 40;
+}
+
+.nav-menu-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: block;
+  padding: 11px 16px;
+  color: #FFFFFF;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  border-top: 3px solid transparent;
+  transition: background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.nav-link:hover,
+.nav-item.active .nav-link {
+  background-color: var(--bank-navy-light);
+  border-top-color: #FFC107;
+  text-decoration: none;
+}
+
+/* Dropdown Menu */
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #FFFFFF;
+  border: 1px solid var(--bank-border);
+  border-top: 2px solid var(--bank-navy);
+  min-width: 220px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 50;
+  padding: 4px 0;
+}
+
+.nav-item:hover .nav-dropdown,
+.nav-item:focus-within .nav-dropdown {
+  display: block;
+}
+
+.nav-dropdown-link {
+  display: block;
+  padding: 8px 16px;
+  font-size: 13px;
+  color: var(--bank-text);
+  text-decoration: none;
+  border-bottom: 1px solid #F1F3F5;
+}
+
+.nav-dropdown-link:last-child {
+  border-bottom: none;
+}
+
+.nav-dropdown-link:hover {
+  background-color: var(--bank-navy-subtle);
+  color: var(--bank-navy);
+  text-decoration: none;
+}
+
+/* Mobile Nav Toggle */
+.mobile-nav-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  padding: 6px 10px;
+  margin: 6px 0;
+  border-radius: var(--bank-radius);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* ============================================================
+   3. BREADCRUMB & GREETING STRIP
+   ============================================================ */
+.bank-sub-header {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--bank-border);
+  padding: 8px 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bank-breadcrumb {
+  font-size: 12px;
+  color: var(--bank-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bank-breadcrumb .crumb-separator {
+  color: #ADB5BD;
+}
+
+.bank-breadcrumb .crumb-active {
+  color: var(--bank-text);
+  font-weight: 600;
+}
+
+.bank-user-welcome {
+  font-size: 12px;
+  color: var(--bank-text-secondary);
+}
+
+.bank-user-welcome strong {
+  color: var(--bank-navy);
+  font-weight: 700;
+}
+
+.bank-last-login {
+  color: var(--bank-text-muted);
+  margin-left: 8px;
+  border-left: 1px solid #DEE2E6;
+  padding-left: 8px;
+}
+
+/* ============================================================
+   4. MAIN PORTAL LAYOUT
+   ============================================================ */
+.bank-layout-container {
+  display: flex;
+  flex: 1;
+  padding: 1.25rem 1.5rem;
+  gap: 1.25rem;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 4A. LEFT SIDEBAR */
+.bank-sidebar {
+  width: 230px;
+  flex-shrink: 0;
+}
+
+.sidebar-panel {
+  background-color: var(--bank-panel);
+  border: 1px solid var(--bank-border);
+  border-radius: var(--bank-radius);
+  margin-bottom: 1rem;
+}
+
+.sidebar-header {
+  background-color: var(--bank-strip);
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--bank-text-secondary);
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--bank-border);
+}
+
+.sidebar-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 9px 12px;
+  font-size: 13px;
+  color: var(--bank-text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--bank-border-light);
+  border-left: 3px solid transparent;
+}
+
+.sidebar-link:hover {
+  background-color: #F8F9FA;
+  color: var(--bank-navy);
+  border-left-color: #CED4DA;
+  text-decoration: none;
+}
+
+.sidebar-menu li.active .sidebar-link {
+  background-color: var(--bank-navy-subtle);
+  color: var(--bank-navy);
+  border-left-color: var(--bank-navy);
+  font-weight: 700;
+}
+
+.sidebar-quick-help {
+  padding: 12px;
+  font-size: 12px;
+  color: var(--bank-text-secondary);
+  line-height: 1.5;
+}
+
+.sidebar-quick-help strong {
+  display: block;
+  color: var(--bank-navy);
+  margin-bottom: 4px;
+}
+
+/* 4B. MAIN CONTENT AREA */
+.bank-content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-width: 0; /* Prevents flex children from overflowing */
+}
+
+/* ============================================================
+   5. INSTITUTIONAL PANELS
+   ============================================================ */
+.bank-panel {
+  background-color: var(--bank-panel);
+  border: 1px solid var(--bank-border);
+  border-radius: var(--bank-radius);
+  overflow: hidden;
+}
+
+.panel-header-strip {
+  background-color: var(--bank-strip);
+  border-bottom: 1px solid var(--bank-border);
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1A2530;
+  letter-spacing: 0.01em;
+}
+
+.panel-action-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--bank-accent);
+}
+
+.panel-action-link:hover {
+  text-decoration: underline;
+}
+
+.panel-body {
+  padding: 14px;
+}
+
+.panel-body.no-padding {
+  padding: 0;
+}
+
+/* Balance Reveal Header Toggle */
+.balance-toggle-btn {
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  color: var(--bank-accent);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 8px;
+  text-decoration: underline;
+}
+
+.balance-toggle-btn:hover {
+  color: var(--bank-accent-hover);
+}
+
+/* ============================================================
+   6. INSTITUTIONAL DATA TABLES
+   ============================================================ */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.bank-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  text-align: left;
+}
+
+.bank-table th {
+  background-color: #F8F9FA;
+  color: var(--bank-text-secondary);
+  font-weight: 700;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--bank-border);
+  white-space: nowrap;
+}
+
+.bank-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--bank-border-light);
+  color: var(--bank-text);
+  vertical-align: middle;
+}
+
+.bank-table tbody tr:hover {
+  background-color: #FBFBFC;
+}
+
+.bank-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Numeric & Semantic Alignments */
+.bank-table .amount-col {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.bank-table td.debit {
+  color: var(--bank-debit);
+  font-weight: 600;
+}
+
+.bank-table td.credit {
+  color: var(--bank-credit);
+  font-weight: 600;
+}
+
+.bank-table .action-cell {
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.bank-table .action-separator {
+  color: #ADB5BD;
+  margin: 0 4px;
+}
+
+/* Table Pagination & Toolbar */
+.table-toolbar {
+  padding: 8px 14px;
+  background-color: #FAFAFA;
+  border-top: 1px solid var(--bank-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--bank-text-secondary);
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.page-btn {
+  background: #FFFFFF;
+  border: 1px solid var(--bank-border);
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: var(--bank-radius);
+  cursor: pointer;
+  color: var(--bank-text);
+}
+
+.page-btn.active {
+  background-color: var(--bank-navy);
+  color: #FFFFFF;
+  border-color: var(--bank-navy);
+}
+
+.page-btn:disabled {
+  background-color: #F1F3F5;
+  color: #ADB5BD;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   7. QUICK TRANSFER FORM
+   ============================================================ */
+.bank-form {
+  font-size: 13px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  grid-column: span 2;
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--bank-text-secondary);
+  margin-bottom: 4px;
+}
+
+.form-label .required-star {
+  color: var(--bank-debit);
+  margin-left: 2px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 7px 10px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--bank-text);
+  background-color: #FFFFFF;
+  border: 1px solid var(--bank-border);
+  border-radius: var(--bank-radius);
+  outline: none;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--bank-navy);
+  box-shadow: 0 0 0 1px var(--bank-navy);
+}
+
+.form-input.error,
+.form-select.error {
+  border-color: var(--bank-debit);
+  background-color: #FFF8F8;
+}
+
+.form-helper {
+  font-size: 11px;
+  color: var(--bank-text-muted);
+  margin-top: 3px;
+}
+
+.form-error-msg {
+  font-size: 11px;
+  color: var(--bank-debit);
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+/* Form Action Buttons */
+.form-actions {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--bank-border-light);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-bank-primary {
+  background-color: var(--bank-navy);
+  color: #FFFFFF;
+  border: 1px solid var(--bank-navy);
+  padding: 7px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--bank-radius);
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+
+.btn-bank-primary:hover {
+  background-color: var(--bank-navy-dark);
+}
+
+.btn-bank-secondary {
+  background-color: #FFFFFF;
+  color: var(--bank-text-secondary);
+  border: 1px solid var(--bank-border);
+  padding: 7px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--bank-radius);
+  cursor: pointer;
+}
+
+.btn-bank-secondary:hover {
+  background-color: #F8F9FA;
+  color: var(--bank-text);
+}
+
+/* Transfer Mode Options */
+.transfer-mode-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.mode-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--bank-text);
+  cursor: pointer;
+}
+
+/* ============================================================
+   8. CARDS & DEPOSITS PANEL
+   ============================================================ */
+.cards-deposits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.sub-panel-box {
+  border: 1px solid var(--bank-border-light);
+  border-radius: var(--bank-radius);
+  padding: 12px;
+  background-color: #FAFAFA;
+}
+
+.sub-panel-box h4 {
+  margin: 0 0 10px 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--bank-navy);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid #E9ECEF;
+  padding-bottom: 6px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 12.5px;
+}
+
+.detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  color: var(--bank-text-secondary);
+}
+
+.detail-value {
+  font-weight: 600;
+  color: var(--bank-text);
+}
+
+.detail-value.highlight {
+  color: var(--bank-navy);
+}
+
+/* ============================================================
+   9. NOTICES & ALERTS
+   ============================================================ */
+.notices-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notice-item {
+  display: flex;
+  gap: 10px;
+  padding: 8px 12px;
+  background-color: #FAFAFA;
+  border-left: 3px solid var(--bank-navy);
+  font-size: 12px;
+  color: var(--bank-text);
+}
+
+.notice-item.alert {
+  border-left-color: #E65100;
+  background-color: #FFFBF0;
+}
+
+.notice-date {
+  font-weight: 700;
+  color: var(--bank-text-secondary);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   10. CONFIRMATION MODAL (TWO-STEP VERIFICATION)
+   ============================================================ */
+.bank-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(7, 33, 70, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 1rem;
+}
+
+.bank-modal {
+  background-color: #FFFFFF;
+  border: 1px solid var(--bank-border);
+  border-radius: var(--bank-radius);
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.bank-modal-header {
+  background-color: var(--bank-strip);
+  border-bottom: 1px solid var(--bank-border);
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--bank-navy);
+}
+
+.bank-modal-body {
+  padding: 16px;
+  font-size: 13px;
+}
+
+.confirm-details-table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+
+.confirm-details-table td {
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--bank-border-light);
+}
+
+.confirm-details-table td:first-child {
+  color: var(--bank-text-secondary);
+  width: 40%;
+  font-weight: 500;
+}
+
+.confirm-details-table td:last-child {
+  font-weight: 700;
+  color: var(--bank-text);
+  text-align: right;
+}
+
+.confirm-warning-box {
+  margin-top: 14px;
+  background-color: #FFF9E6;
+  border: 1px solid #FFE082;
+  padding: 8px 12px;
+  font-size: 11.5px;
+  color: #7A5300;
+  line-height: 1.4;
+}
+
+.bank-modal-footer {
+  padding: 12px 16px;
+  background-color: #F8F9FA;
+  border-top: 1px solid var(--bank-border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* ============================================================
+   11. INSTITUTIONAL FOOTER
+   ============================================================ */
+.bank-footer {
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--bank-border);
+  margin-top: auto;
+  font-size: 12px;
+  color: var(--bank-text-secondary);
+}
+
+.footer-security-banner {
+  background-color: #FFF3CD;
+  border-bottom: 1px solid #FFEEBA;
+  color: #856404;
+  padding: 8px 1.5rem;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.footer-main {
+  padding: 1.5rem;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.footer-links-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+
+.footer-links-row a {
+  color: var(--bank-navy);
+}
+
+.footer-regulatory-text {
+  font-size: 11px;
+  color: var(--bank-text-muted);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.footer-copyright {
+  font-size: 11px;
+  color: #ADB5BD;
+}
+
+/* ============================================================
+   12. RESPONSIVE BREAKPOINTS
+   ============================================================ */
+@media (max-width: 1024px) {
+  .bank-layout-container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .bank-sidebar {
+    width: 100%;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.full-width {
+    grid-column: span 1;
+  }
+
+  .cards-deposits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .bank-utility-bar {
+    padding: 0 1rem;
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    gap: 4px;
+  }
+
+  .bank-utility-links {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+  }
+
+  .nav-menu-list {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nav-menu-list.mobile-open {
+    display: flex;
+  }
+
+  .nav-dropdown {
+    position: static;
+    box-shadow: none;
+    background-color: var(--bank-navy-dark);
+  }
+
+  .nav-dropdown-link {
+    color: #CFD8DC;
+  }
+
+  .nav-dropdown-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
+  }
+
+  .bank-sub-header {
+    padding: 8px 1rem;
+  }
+}
